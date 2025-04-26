@@ -147,34 +147,43 @@ You should:
           </div>
         )}
 
-        <div className="border-t p-4 bg-white">
-          <form onSubmit={handleSubmit} className="flex space-x-4">
-            <select
-              value={selectedModel}
-              onChange={(e) => setSelectedModel(e.target.value)}
-              className="border rounded px-2 py-1"
-            >
-              {Object.entries(GROQ_MODELS).map(([name, value]) => (
-                <option key={value} value={value}>
-                  {name}
-                </option>
-              ))}
-            </select>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-1 border rounded px-4 py-2"
-              disabled={loading}
-            />
-            <button
-              type="submit"
-              disabled={loading || !input.trim()}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50"
-            >
-              Send
-            </button>
+        <div className="border-t p-4 bg-white sticky bottom-0 shadow-lg">
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <div className="flex items-center space-x-2">
+              <select
+                value={selectedModel}
+                onChange={(e) => setSelectedModel(e.target.value)}
+                className="flex-shrink-0 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+              >
+                {Object.entries(GROQ_MODELS).map(([name, value]) => (
+                  <option key={value} value={value}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="پیام خود را بنویسید..."
+                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 pr-10"
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  disabled={loading || !input.trim()}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                >
+                  ارسال
+                </button>
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 text-center">
+              {loading
+                ? "در حال پردازش..."
+                : "برای شروع گفتگو، پیام خود را بنویسید"}
+            </div>
           </form>
         </div>
       </div>
